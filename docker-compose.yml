@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  php:
+    build:
+      context: ./sources/php
+      args:
+        - USER_ID=${USER_ID}
+        - GROUP_ID=${GROUP_ID}
+        - USER_NAME=${USER_NAME}
+    container_name: php-symfony-${USER_NAME}
+    environment:
+      - USER_NAME=${USER_NAME}
+      - GIT_USER='name'
+      - GIT_EMAIL='name@mail.com'
+    volumes:
+      - ./www:/symfony
+      - ./ssh:/home/${USER_NAME}/.ssh
+    ports:
+      - 8000:8000
